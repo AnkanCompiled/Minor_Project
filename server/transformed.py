@@ -30,6 +30,6 @@ def apply_transformations(image_path, output_folder):
 
 
 # Example usage:
-output_folder = 'data/images'  # Folder to save the expanded images
+output_folder = 'server/data/images'  # Folder to save the expanded images
 image_path = f"{output_folder}/001-0.jpg"  # Provide the path to your image
 apply_transformations(image_path, output_folder)

@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error
 from feature_extraction import extract_features
 
 # Load dataset
-data = pd.read_csv('data/labels.csv')
+data = pd.read_csv('server/data/labels.csv')
 X = []
 y = []
 

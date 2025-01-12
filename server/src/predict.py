@@ -1,8 +1,14 @@
 import joblib
+
+import os
 from feature_extraction import extract_features
 
+# Load the model once at the start to improve performance
+model = joblib.load('server/personality_model.pkl')
+
 def predict_personality(image_path):
-    model = joblib.load('personality_model.pkl')
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"File not found: {image_path}")
     features = extract_features(image_path)
     prediction = model.predict([list(features.values())])
     return {
@@ -13,6 +19,3 @@ def predict_personality(image_path):
         "Neuroticism": prediction[0][4],
     }
 
-# Example usage
-image_path = 'data/images/sample1.jpg'
-print(predict_personality(image_path))
