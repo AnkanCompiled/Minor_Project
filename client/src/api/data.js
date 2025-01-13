@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchPersonalityApi = async () => {
+export const fetchPersonalityApi = async (imagePath) => {
   try {
     const response = await axios.post("http://localhost:5000/predict", {
       image_path: imagePath,

@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { uploadImageApi } from "../api/data";
+import { fetchPersonalityApi, uploadImageApi } from "../api/data";
+import LoaderGear from "./LoaderGear";
+import { useData } from "../context/dataContext";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadHandwriting() {
-  const [file, setFile] = useState(null); // Use 'file' state to hold the file itself
-  const [uploadStatus, setUploadStatus] = useState("");
+  const navigate = useNavigate();
+  const { updateUserData } = useData();
+  const [file, setFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState(<></>);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setFile(selectedFile); // Save the file object instead of the URL
+      setFile(selectedFile);
     }
   };
 
@@ -19,12 +24,21 @@ export default function UploadHandwriting() {
     }
 
     const formData = new FormData();
-    formData.append("file", file); // Append the actual file object
+    formData.append("file", file);
 
     try {
       const result = await uploadImageApi(formData);
-      console.log(result);
-      setUploadStatus("File uploaded successfully!");
+      setUploadStatus(
+        <div className="flex justify-center items-center gap-1">
+          <LoaderGear />
+          <p className="text-gray-500">Please wait analyzing data...</p>
+        </div>
+      );
+      const personality = await fetchPersonalityApi(result?.file_path);
+      console.log(personality);
+      updateUserData(personality);
+      setUploadStatus(<p className="text-lime-600">✅ Data analyzed</p>);
+      navigate("/data");
     } catch (error) {
       console.error(error);
       setUploadStatus("Failed to upload the file.");
@@ -32,12 +46,9 @@ export default function UploadHandwriting() {
   };
 
   return (
-    <div className="flex justify-center gap-3 px-4 w-[80vh] py-3 flex-col bg-[#8693AB] rounded-md shadow-md">
-      <h1 className="text-xl font-semibold text-center text-white">
-        Upload Your Handwriting
-      </h1>
+    <div className="flex justify-center gap-3 px-4 w-full sm:w-[80vw] xl:w-[40vw] py-3 flex-col bg-[#F7F7F7] text-[#333333] rounded-md shadow-md">
       <input
-        className="w-full bg-white text-lg rounded-md"
+        className="w-full bg-white text-lg rounded-sm"
         type="file"
         accept="image/*"
         onChange={handleFileChange}
@@ -45,7 +56,7 @@ export default function UploadHandwriting() {
       {file && (
         <div className="flex gap-2 flex-col justify-center">
           <img
-            className="rounded-lg"
+            className="rounded-lg border-4"
             src={URL.createObjectURL(file)}
             alt="Uploaded or Captured"
           />
@@ -58,7 +69,7 @@ export default function UploadHandwriting() {
         </div>
       )}
       {uploadStatus && (
-        <p className="text-white text-center mt-3">{uploadStatus}</p>
+        <div className="text-white text-center">{uploadStatus}</div>
       )}
     </div>
   );
