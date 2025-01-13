@@ -18,4 +18,3 @@ def predict_personality(image_path):
         "Agreeableness": prediction[0][3],
         "Neuroticism": prediction[0][4],
     }
-

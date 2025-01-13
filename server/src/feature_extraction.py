@@ -15,7 +15,6 @@ def extract_features(image_path):
     # Top Margin
     y_coords = [cv2.boundingRect(c)[1] for c in contours]
     features['top_margin'] = min(y_coords) if y_coords else 0
-
     # Pen Pressure
     features['pen_pressure'] = np.mean(binary)
 
@@ -42,5 +41,4 @@ def extract_features(image_path):
         for i in range(len(lines) - 1)
     ]
     features['line_spacing'] = np.mean(line_spacings) if line_spacings else 0
-
     return features

@@ -11,7 +11,9 @@ y = []
 
 # Extract features
 for idx, row in data.iterrows():
-    features = extract_features(f"data/images/{row['filename']}")
+    features = extract_features(f"server/data/images/{row['filename']}")
+    progress = (idx + 1) / len(data) * 100
+    print(f"Extraction: {row['filename']} Completed: {progress:.2f}%")
     X.append(list(features.values()))
     y.append(row[['openness', 'conscientiousness', 'extraversion', 'agreeableness', 'neuroticism']].values)
 
