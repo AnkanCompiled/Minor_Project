@@ -85,5 +85,5 @@ def apply_transformations(image_path, output_folder):
 
 # Example usage:
 output_folder = 'server/data/images'  # Folder to save the expanded images
-image_path = f"{output_folder}/000-0.jpg"  # Provide the path to your image
+image_path = f"{output_folder}/003-0.jpg"  # Provide the path to your image
 apply_transformations(image_path, output_folder)

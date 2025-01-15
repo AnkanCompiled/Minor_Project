@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function CardComponent({ image, text, desc }) {
   return (
-    <div className="grid grid-rows-[2fr_0.5fr_0.5fr] gap-1 sm:w-[25vw] px-5 py-2 rounded-lg shadow-md">
+    <div className="grid grid-rows-[2fr_0.5fr_0.5fr] gap-1 sm:w-[25vw] px-5 py-2 rounded-lg shadow-md bg-white">
       <div
         className="w-full flex justify-center bg-[#4CB8A4] py-3"
         style={{

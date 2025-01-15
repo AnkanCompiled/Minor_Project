@@ -1,13 +1,8 @@
 import React from "react";
+import { scaleValue } from "../utils/scaleValue.js";
 
-export default function TraitComponent({ traits, value }) {
+export default function TraitComponent({ traits, value, description }) {
   const roundedValue = parseFloat(value.toFixed(1));
-
-  function scaleValue(num) {
-    const minNew = 1;
-    const maxNew = 5;
-    return minNew + num * (maxNew - minNew);
-  }
 
   const score = scaleValue(roundedValue);
   const gradeColor =
@@ -20,9 +15,10 @@ export default function TraitComponent({ traits, value }) {
       : "text-red-500";
 
   return (
-    <div className="flex flex-col text-center items-center py-4 gap-2 w-full bg-[#F7F7F7] rounded-md shadow-md">
+    <div className="group flex flex-col text-center items-center py-4 gap-2 w-full bg-[#F7F7F7] rounded-md shadow-md relative">
       <p className="text-xl text-[#444444] font-semibold">{traits}</p>
 
+      {/* Circular Score Display */}
       <div className="relative w-40 h-40">
         <svg
           className="rotate-[90deg] w-full h-full"
@@ -56,6 +52,11 @@ export default function TraitComponent({ traits, value }) {
           <span className="text-4xl font-bold text-[#5A9BD6]">{score}/5</span>
           <span className="text-[#5A9BD6] block">Score</span>
         </div>
+      </div>
+
+      {/* Hover Details */}
+      <div className="fixed bottom-16 left-1/2 -translate-x-1/2 bg-white text-gray-700 p-4 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+        <p className="text-sm font-medium">{description}</p>
       </div>
     </div>
   );

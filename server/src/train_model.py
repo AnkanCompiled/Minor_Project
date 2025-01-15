@@ -30,4 +30,4 @@ print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
 
 # Save the model
 import joblib
-joblib.dump(model, 'personality_model.pkl')
+joblib.dump(model, 'server/personality_model.pkl')

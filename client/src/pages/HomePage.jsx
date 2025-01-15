@@ -9,16 +9,24 @@ import websiteVideo from "../assets/websiteVideo.gif";
 
 export default function HomePage() {
   return (
-    <div className="h-screen w-screen bg-[#F7F7F7]">
+    <div className="main-page">
       <NavbarComponent />
       <div className="py-4 flex flex-col gap-5 bg-[#5A9BD6]">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-white">
-          Upload Your Handwriting
-        </h1>
-        <div className="w-full flex justify-center">
-          <UploadHandwriting />
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="hidden lg:flex flex-col gap-8 p-10">
+            <h1 className="text-6xl text-white font-extrabold">
+              Analyze Your Handwriting
+            </h1>
+            <p className="text-2xl text-gray-100 font-semibold">
+              Understand your Personality by the click of a button!
+            </p>
+          </div>
+          <div className="w-full flex justify-center">
+            <UploadHandwriting />
+          </div>
         </div>
       </div>
+
       <div className="py-4 flex flex-col sm:flex-row sm:justify-evenly">
         {[
           {
@@ -56,7 +64,7 @@ export default function HomePage() {
             className="h-72 hidden xl:block rounded-md shadow-lg"
             alt="gif"
           />
-          <div className="flex flex-col gap-2 xl:border-2 border-gray-500 xl:p-4 rounded-md xl:shadow-md">
+          <div className="flex flex-col gap-2 xl:border-b-2 border-gray-300 xl:p-4 rounded-md xl:shadow-md">
             <h3 className="text-2xl font-semibold">
               Agreeableness, Conscientiousness, Neuroticism, Extraversion, and
               Openness
