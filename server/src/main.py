@@ -8,6 +8,10 @@ app = Flask(__name__)
 
 CORS(app)
 
+# Create an "uploads" folder if it doesn't exist
+if not os.path.exists('server/data/uploads'):
+    os.makedirs('server/data/uploads')
+
 @app.route('/upload', methods=['POST'])
 
 def upload_file():
